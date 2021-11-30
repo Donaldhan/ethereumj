@@ -89,6 +89,7 @@ Example:
 > git clone https://github.com/ethereum/ethereumj
 > cd ethereumj
 > gradlew build
+#> ./gradlew build.gradle
 ```
   IDEA: 
 * File -> New -> Project from existing sources…

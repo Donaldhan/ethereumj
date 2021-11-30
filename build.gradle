@@ -37,6 +37,9 @@ subprojects {
 
     repositories {
         jcenter()
+        mavenLocal()
+        maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
         maven { url "https://dl.bintray.com/ethereum/maven/" }
     }
 }
