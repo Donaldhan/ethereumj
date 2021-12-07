@@ -1,7 +1,13 @@
 wrapper.gradleVersion = '4.6'
 
+//插件的选择
+//    https://www.cnblogs.com/huang0925/p/3458507.html
 allprojects {
-    apply plugin: 'eclipse'
+    //eclipse
+//    apply plugin: 'eclipse'
+    //idea
+
+    apply plugin: 'idea'
     if (JavaVersion.current().isJava8Compatible()) {
         //Disable lint of javadoc until someone fixes all the html
         tasks.withType(Javadoc) {
@@ -22,13 +28,15 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
 
-    def config = new ConfigSlurper().parse(new File("$projectDir/src/main/resources/version.properties").toURI().toURL())
+//    def config = new ConfigSlurper().parse(new File("$projectDir/src/main/resources/version.properties").toURI().toURL())
 
     group = 'org.ethereum'
 
-    version = config.versionNumber + ("master" == gitCurBranch() ? "-RELEASE" : "-SNAPSHOT")
+//    version = config.versionNumber + ("master" == gitCurBranch() ? "-RELEASE" : "-SNAPSHOT")
+    version = '1.12.0'
 
-    println("Building version: " + version + " (from branch " + gitCurBranch() + ")")
+//    println("Building version: " + version + " (from branch " + gitCurBranch() + ")")
+    println("Building version: " + version )
 
     compileJava.options.encoding = 'UTF-8'
     compileJava.options.compilerArgs << '-XDignore.symbol.file'
@@ -36,10 +44,17 @@ subprojects {
     compileTestJava.options.encoding = 'UTF-8'
 
     repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+//        maven { url "https://dl.bintray.com/ethereum/maven/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'http://repo.springsource.org/plugins-release'}
+        maven { url "https://repo.spring.io/plugins-release" }
+      google()
         jcenter()
         mavenLocal()
-        maven { url 'http://repo.spring.io/plugins-release' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/central/' }
-        maven { url "https://dl.bintray.com/ethereum/maven/" }
+
     }
 }

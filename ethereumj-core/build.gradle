@@ -2,8 +2,19 @@ import java.text.SimpleDateFormat
 
 buildscript {
     repositories {
+        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'http://repo.springsource.org/plugins-release'}
+        maven { url "https://repo.spring.io/plugins-release" }
+        maven { url "https://dl.bintray.com/ethereum/maven/" }
+        google()
         jcenter()
-        maven { url 'http://repo.spring.io/plugins-release' }
+        mavenLocal()
+
     }
     dependencies {
         classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
@@ -20,8 +31,11 @@ plugins {
     id 'com.jfrog.bintray' version '1.0'
     id 'org.ajoberstar.grgit' version '2.2.0' apply false
 }
-
+//apply plugin: 'maven'
+//apply plugin: 'propdeps'
 apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+//apply plugin: 'propdeps-eclipse'
 apply plugin: 'com.jfrog.artifactory-upload'
 
 sourceCompatibility = 1.8
