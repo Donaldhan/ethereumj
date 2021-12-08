@@ -2,18 +2,20 @@ import java.text.SimpleDateFormat
 
 buildscript {
     repositories {
-        maven { url 'https://repo1.maven.org/maven2/' }
+        mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
-//        maven { url 'http://maven.oschina.net/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url 'http://repo.springsource.org/plugins-release'}
-        maven { url "https://repo.spring.io/plugins-release" }
-        maven { url "https://dl.bintray.com/ethereum/maven/" }
+//        maven { url 'https://repo1.maven.org/maven2/' }
+        mavenCentral()
         google()
         jcenter()
-        mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
+//        maven { url 'http://repo.springsource.org/plugins-release'}
+        maven { url "https://repo.spring.io/plugins-release" }
+        maven { url "https://dl.bintray.com/ethereum/maven/" }
+
+
 
     }
     dependencies {
@@ -142,7 +144,10 @@ dependencies {
 
     compile "org.ethereum:leveldbjni-all:1.18.3"             // native leveldb components
 
-    compile "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
+//    compile "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
+//    implementation  "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
+//    compile "org.ethereum:rocksdbjni:5.10.3"
+    implementation 'org.rocksdb:rocksdbjni:5.9.2'
 
     compile "org.ethereum:solcJ-all:0.4.25"                  // Solidity Compiler win/mac/linux binaries
 

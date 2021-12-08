@@ -44,17 +44,19 @@ subprojects {
     compileTestJava.options.encoding = 'UTF-8'
 
     repositories {
+        mavenLocal()
+        maven { url 'https://repo1.maven.org/maven2/' }
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 //        maven { url 'http://maven.oschina.net/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
-//        maven { url "https://dl.bintray.com/ethereum/maven/" }
+        mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'http://repo.springsource.org/plugins-release'}
         maven { url "https://repo.spring.io/plugins-release" }
-      google()
+        maven { url "https://dl.bintray.com/ethereum/maven/" }
+        google()
         jcenter()
-        mavenLocal()
 
     }
 }
