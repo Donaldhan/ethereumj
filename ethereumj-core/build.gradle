@@ -147,7 +147,8 @@ dependencies {
 //    compile "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
 //    implementation  "org.ethereum:rocksdbjni:5.9.2"                   // RocksDB Java API
 //    compile "org.ethereum:rocksdbjni:5.10.3"
-    implementation 'org.rocksdb:rocksdbjni:5.9.2'
+//    implementation 'org.rocksdb:rocksdbjni:5.9.2'
+    compile 'org.rocksdb:rocksdbjni:5.9.2'
 
     compile "org.ethereum:solcJ-all:0.4.25"                  // Solidity Compiler win/mac/linux binaries
 

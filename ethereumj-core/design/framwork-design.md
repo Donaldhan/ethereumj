@@ -1,6 +1,6 @@
 # TODO
 
-* 构建项目 readme
+* demo test and run
 
 # 附
 [ethereumj github](https://github.com/Donaldhan/ethereumj)  
