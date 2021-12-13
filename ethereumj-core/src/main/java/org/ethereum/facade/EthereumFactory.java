@@ -41,6 +41,11 @@ public class EthereumFactory {
         return createEthereum((Class) null);
     }
 
+    /**
+     *
+     * @param userSpringConfig 基于spring的配置类
+     * @return
+     */
     public static Ethereum createEthereum(Class userSpringConfig) {
         return userSpringConfig == null ? createEthereum(new Class[] {DefaultConfig.class}) :
                 createEthereum(DefaultConfig.class, userSpringConfig);
@@ -59,6 +64,10 @@ public class EthereumFactory {
                 createEthereum(DefaultConfig.class, userSpringConfig);
     }
 
+    /**
+     * @param springConfigs
+     * @return
+     */
     public static Ethereum createEthereum(Class ... springConfigs) {
         logger.info("Starting EthereumJ...");
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(springConfigs);

@@ -1,1 +1,2 @@
-1. gradle 插件和仓库的寻找顺序
+1. BasicSample配置类；
+2. 启动Ethereum

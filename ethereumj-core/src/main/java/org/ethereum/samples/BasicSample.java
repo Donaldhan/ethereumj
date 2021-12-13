@@ -131,6 +131,7 @@ public class BasicSample implements Runnable {
         setupLogging();
 
         // adding the main EthereumJ callback to be notified on different kind of events
+        // 添加主链不同种类事件的回调
         ethereum.addListener(listener);
 
         logger.info("Sample component created. Listening for ethereum events...");
@@ -143,6 +144,8 @@ public class BasicSample implements Runnable {
      * The method tracks step-by-step the instance lifecycle from node discovery till sync completion.
      * At the end the method onSyncDone() is called which might be overridden by a sample subclass
      * to start making other things with the Ethereum network
+     * 追踪直到同步完成过程中，节点发现的声明周期。
+     * 在onSyncDone被子类重写调用的情况下，可以做Ethereum网络的其他事情
      */
     public void run() {
         try {
@@ -161,7 +164,7 @@ public class BasicSample implements Runnable {
             waitForFirstBlock();
 
             waitForSync();
-
+            //同步完成
             onSyncDone();
 
         } catch (Exception e) {
@@ -171,30 +174,36 @@ public class BasicSample implements Runnable {
 
     /**
      * Is called when the whole blockchain sync is complete
+     * 同步完成时调用
      */
     public void onSyncDone() throws Exception {
         logger.info("Monitoring new blocks in real-time...");
     }
 
+    /**
+     * peer节点
+     */
     protected List<Node> nodesDiscovered = new Vector<>();
 
     /**
      * Waits until any new nodes are discovered by the UDP discovery protocol
+     * 等待，直到新的节点通过UDP发现协议发现
      */
     protected void waitForDiscovery() throws Exception {
         logger.info("Waiting for nodes discovery...");
-
+        //获取发现节点列表
         int bootNodes = config.peerDiscoveryIPList().size();
         int cnt = 0;
         while(true) {
             Thread.sleep(cnt < 30 ? 300 : 5000);
-
+            //已发现的节点，大于boot配置节点时，则返回
             if (nodesDiscovered.size() > bootNodes) {
                 logger.info("[v] Discovery works, new nodes started being discovered.");
                 return;
             }
-
+            //发现次数大于30次
             if (cnt >= 30) logger.warn("Discovery keeps silence. Waiting more...");
+            //大于50次
             if (cnt > 50) {
                 logger.error("Looks like discovery failed, no nodes were found.\n" +
                         "Please check your Firewall/NAT UDP protocol settings.\n" +
@@ -285,6 +294,9 @@ public class BasicSample implements Runnable {
         }
     }
 
+    /**
+     * 是在在同步
+     */
     boolean synced = false;
     boolean syncComplete = false;
 
