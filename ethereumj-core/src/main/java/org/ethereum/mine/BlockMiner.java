@@ -43,7 +43,7 @@ import static java.lang.Math.max;
 
 /**
  * Manages embedded CPU mining and allows to use external miners.
- *
+ * 管理嵌入式的cup挖矿
  * Created by Anton Nashatyrev on 10.12.2015.
  */
 @Component

@@ -31,6 +31,9 @@ import java.util.function.Function;
 
 import static org.ethereum.util.ByteUtil.toHexString;
 
+/**
+ *
+ */
 public class BlockSummary {
 
     private final Block block;

@@ -65,27 +65,44 @@ public class CommonConfig {
         return defaultInstance;
     }
 
+    /**
+     * 系统属性
+     * @return
+     */
     @Bean
     public SystemProperties systemProperties() {
         return SystemProperties.getSpringDefault();
     }
 
+    /**
+     * @return
+     */
     @Bean
     BeanPostProcessor initializer() {
         return new Initializer();
     }
 
 
+    /**
+     * @return
+     */
     @Bean @Primary
     public Repository repository() {
         return new RepositoryWrapper();
     }
 
+    /**
+     * @return
+     */
     @Bean
     public Repository defaultRepository() {
         return new RepositoryRoot(stateSource(), null);
     }
 
+    /**
+     * @param stateRoot
+     * @return
+     */
     @Bean @Scope("prototype")
     public Repository repository(byte[] stateRoot) {
         return new RepositoryRoot(stateSource(), stateRoot);
@@ -112,6 +129,9 @@ public class CommonConfig {
         return new XorDataSource<>(src, HashUtil.sha3("state".getBytes()));
     }
 
+    /**
+     * @return
+     */
     @Bean
     public StateSource stateSource() {
         fastSyncCleanUp();
@@ -123,6 +143,10 @@ public class CommonConfig {
         return stateSource;
     }
 
+    /**
+     * @param name
+     * @return
+     */
     @Bean
     @Scope("prototype")
     public Source<byte[], byte[]> cachedDbSource(String name) {
@@ -139,12 +163,19 @@ public class CommonConfig {
         return writeCache;
     }
 
+    /**
+     * @param name
+     * @return
+     */
     @Bean
     @Scope("prototype")
     public Source<byte[], byte[]> blockchainSource(String name) {
         return new XorDataSource<>(blockchainDbCache(), HashUtil.sha3(name.getBytes()));
     }
 
+    /**
+     * @return
+     */
     @Bean
     public AbstractCachedSource<byte[], byte[]> blockchainDbCache() {
         WriteCache.BytesKey<byte[]> ret = new WriteCache.BytesKey<>(
@@ -153,10 +184,19 @@ public class CommonConfig {
         return ret;
     }
 
+    /**
+     * @param name
+     * @return
+     */
     public DbSource<byte[]> keyValueDataSource(String name) {
         return keyValueDataSource(name, DbSettings.DEFAULT);
     }
 
+    /**
+     * @param name
+     * @param settings
+     * @return
+     */
     @Bean
     @Scope("prototype")
     @Primary
@@ -181,18 +221,27 @@ public class CommonConfig {
         }
     }
 
+    /**
+     * @return
+     */
     @Bean
     @Scope("prototype")
     protected LevelDbDataSource levelDbDataSource() {
         return new LevelDbDataSource();
     }
 
+    /**
+     * @return
+     */
     @Bean
     @Scope("prototype")
     protected RocksDbDataSource rocksDbDataSource() {
         return new RocksDbDataSource();
     }
 
+    /**
+     *
+     */
     public void fastSyncCleanUp() {
         if (!systemProperties().isSyncEnabled()) return;
         byte[] fastsyncStageBytes = blockchainDB().get(FastSyncManager.FASTSYNC_DB_KEY_SYNC_STAGE);
@@ -213,6 +262,9 @@ public class CommonConfig {
         }
     }
 
+    /**
+     * @param source
+     */
     private void resetDataSource(Source source) {
         if (source instanceof DbSource) {
             ((DbSource) source).reset();
@@ -221,17 +273,26 @@ public class CommonConfig {
         }
     }
 
+    /**
+     * @return
+     */
     @Bean(name = "EthereumListener")
     public CompositeEthereumListener ethereumListener() {
         return new CompositeEthereumListener();
     }
 
+    /**
+     * @return
+     */
     @Bean
     @Lazy
     public DbSource<byte[]> headerSource() {
         return keyValueDataSource("headers");
     }
 
+    /**
+     * @return
+     */
     @Bean
     @Lazy
     public HeaderStore headerStore() {
@@ -250,6 +311,9 @@ public class CommonConfig {
         return headerStore;
     }
 
+    /**
+     * @return
+     */
     @Bean
     public Source<byte[], ProgramPrecompile> precompileSource() {
 
@@ -274,6 +338,9 @@ public class CommonConfig {
         });
     }
 
+    /**
+     * @return
+     */
     @Bean
     public DbSource<byte[]> blockchainDB() {
         DbSettings settings = DbSettings.newInstance()
@@ -283,11 +350,17 @@ public class CommonConfig {
         return keyValueDataSource("blockchain", settings);
     }
 
+    /**
+     * @return
+     */
     @Bean
     public DbFlushManager dbFlushManager() {
         return new DbFlushManager(systemProperties(), dbSources, blockchainDbCache());
     }
 
+    /**
+     * @return
+     */
     @Bean
     public BlockHeaderValidator headerValidator() {
 
@@ -302,6 +375,9 @@ public class CommonConfig {
         return new BlockHeaderValidator(rules);
     }
 
+    /**
+     * @return
+     */
     @Bean
     public ParentBlockHeaderValidator parentHeaderValidator() {
 
@@ -314,6 +390,9 @@ public class CommonConfig {
         return new ParentBlockHeaderValidator(rules);
     }
 
+    /**
+     * @return
+     */
     @Bean
     @Lazy
     public PeerSource peerSource() {

@@ -68,18 +68,24 @@ public interface Ethereum {
 
     /**
      * Factory for general transaction
-     *
+     * 创建一般交易
      *
      * @param nonce - account nonce, based on number of transaction submited by
      *                this account
+     *              账户nonce
      * @param gasPrice - gas price bid by miner , the user ask can be based on
      *                   lastr submited block
+     *                 gas价格
      * @param gas - the quantity of gas requested for the transaction
+     *  gas数量
      * @param receiveAddress - the target address of the transaction
+     * 接收地址
      * @param value - the ether value of the transaction
+     *              以太币
      * @param data - can be init procedure for creational transaction,
      *               also msg data for invoke transaction for only value
      *               transactions this one is empty.
+     *             交易数据，针对合约类
      * @return newly created transaction
      */
     Transaction createTransaction(BigInteger nonce,
@@ -90,6 +96,7 @@ public interface Ethereum {
 
 
     /**
+     * 提交交易
      * @param transaction submit transaction to the net, return option to wait for net
      *                    return this transaction as approved
      */
@@ -99,6 +106,7 @@ public interface Ethereum {
     /**
      * Executes the transaction based on the specified block but doesn't change the blockchain state
      * and doesn't send the transaction to the network
+     * 在特定的区块上，执行交易，不改变区块链状态，不发送交易到网络
      * @param tx     The transaction to execute. No need to sign the transaction and specify the correct nonce
      * @param block  Transaction is executed the same way as if it was executed after all transactions existing
      *               in that block. I.e. the root state is the same as this block's root state and this block
@@ -111,9 +119,9 @@ public interface Ethereum {
      * Executes Txes of the block in the same order and from the same state root
      * as they were executed during regular block import
      * This method doesn't make changes in blockchain state
-     *
+     * 以世界状态中区块交易的顺序执行交易，不会改变区块状态
      * <b>Note:</b> requires block's ancestor to be presented in the database
-     *
+     * 需要区块的前驱在数据库中
      * @param block block to be replayed
      * @return block summary with receipts and execution summaries
      *         <b>Note:</b> it doesn't include block rewards info
@@ -123,9 +131,10 @@ public interface Ethereum {
     /**
      * Call a contract function locally without sending transaction to the network
      * and without changing contract storage.
-     * @param receiveAddress hex encoded contract address
-     * @param function  contract function
-     * @param funcArgs  function arguments
+     * 本地调用一个合约方法，不会发送交易到网络，同时不改变合约存储
+     * @param receiveAddress hex encoded contract address 合约地址
+     * @param function  contract function 方法
+     * @param funcArgs  function arguments 方法参数
      * @return function result. The return value can be fetched via {@link ProgramResult#getHReturn()}
      * and decoded with {@link org.ethereum.core.CallTransaction.Function#decodeResult(byte[])}.
      */
@@ -139,6 +148,7 @@ public interface Ethereum {
      * @param receiveAddress hex encoded contract address
      * @param senderPrivateKey  Normally the constant call doesn't require a sender though
      *                          in some cases it may affect the result (e.g. if function refers to msg.sender)
+     *                          发送者私钥
      * @param function  contract function
      * @param funcArgs  function arguments
      * @return function result. The return value can be fetched via {@link ProgramResult#getHReturn()}
@@ -168,36 +178,52 @@ public interface Ethereum {
 
 //  2.   // is blockchain still loading - if buffer is not empty
 
+    /**
+     * @param root
+     * @return
+     */
     Repository getSnapshotTo(byte[] root);
 
+    /**
+     * @return
+     */
     AdminInfo getAdminInfo();
 
+    /**
+     * @return
+     */
     ChannelManager getChannelManager();
 
     /**
      * @return - currently pending transactions received from the net
+     * 获取当前从网络中接收到的待确认交易
      */
     List<Transaction> getWireTransactions();
 
     /**
      * @return - currently pending transactions sent to the net
+     * 获取当前发送到网络的待确认交易
      */
     List<Transaction> getPendingStateTransactions();
 
     BlockLoader getBlockLoader();
 
     /**
+     * Swarm和Whisper是什么鬼？：https://www.jianshu.com/p/b5a67c00f6c9
+     *
      * @return Whisper implementation if the protocol is available
      */
     Whisper getWhisper();
 
     /**
      *  Gets the Miner component
+     *  挖矿主键
      */
     BlockMiner getBlockMiner();
 
     /**
      * Initiates blockchain syncing process
+     * 初始区块链同步过程
      */
     void initSyncing();
 

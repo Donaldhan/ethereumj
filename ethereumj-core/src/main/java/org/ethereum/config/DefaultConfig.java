@@ -66,6 +66,10 @@ public class DefaultConfig {
         });
     }
 
+    /**
+     * 区块存储
+     * @return
+     */
     @Bean
     public BlockStore blockStore(){
         commonConfig.fastSyncCleanUp();
@@ -77,12 +81,19 @@ public class DefaultConfig {
         return indexedBlockStore;
     }
 
+    /**
+     * 交易存储
+     * @return
+     */
     @Bean
     public TransactionStore transactionStore() {
         commonConfig.fastSyncCleanUp();
         return new TransactionStore(commonConfig.cachedDbSource("transactions"));
     }
 
+    /**
+     * @return
+     */
     @Bean
     public PruneManager pruneManager() {
         if (config.databasePruneDepth() >= 0) {
