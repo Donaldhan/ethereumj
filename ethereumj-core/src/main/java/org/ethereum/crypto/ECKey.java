@@ -98,11 +98,11 @@ import static org.ethereum.util.ByteUtil.toHexString;
  * Creating a new ECKey with the empty constructor will generate a new random keypair. Other static methods can be used
  * when you already have the public or private parts. If you create a key with only the public part, you can check
  * signatures but not create them.</p>
- *
+ * 表示基于椭圆曲线的公私钥对，用于数字签名，而不是加密；
  * <p>The ECDSA algorithm supports <i>key recovery</i> in which a signature plus a couple of discriminator bits can
  * be reversed to find the public key used to calculate it. This can be convenient when you have a message and a
  * signature and want to find out who signed it, rather than requiring the user to provide the expected identity.</p>
- *
+ * 此ECDSA算法支持从签名信息中获取公钥。此方法为想要从签名中知道谁签的提供了遍历，而不是用户提供身份信息
  * This code is borrowed from the bitcoinj project and altered to fit Ethereum.<br>
  * See <a href="https://github.com/bitcoinj/bitcoinj/blob/df9f5a479d28c84161de88165917a5cffcba08ca/core/src/main/java/org/bitcoinj/core/ECKey.java">
  * bitcoinj on GitHub</a>.
@@ -484,6 +484,7 @@ public class ECKey implements Serializable {
 
     /**
      * Generates the NodeID based on this key, that is the public key without first format byte
+     * 从公钥生成节点id
      */
     public byte[] getNodeId() {
         if (nodeId == null) {

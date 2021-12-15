@@ -34,6 +34,9 @@ import static org.ethereum.util.ByteUtil.bytesToIp;
 import static org.ethereum.util.ByteUtil.hostToBytes;
 import static org.ethereum.util.ByteUtil.toHexString;
 
+/**
+ *
+ */
 public class Node implements Serializable {
     private static final long serialVersionUID = -4267600517925770636L;
 

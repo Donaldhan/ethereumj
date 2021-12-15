@@ -28,7 +28,7 @@ public interface PendingState extends org.ethereum.facade.PendingState {
     /**
      * Adds transactions received from the net to the list of wire transactions <br>
      * Triggers an update of pending state
-     *
+     * 添加从网络中接收到的交易，触发PendingState状态的更新
      * @param transactions txs received from the net
      * @return sublist of transactions with NEW_PENDING status
      */
@@ -51,6 +51,10 @@ public interface PendingState extends org.ethereum.facade.PendingState {
      *     <li>removes outdated wire txs</li>
      *     <li>updates pending state</li>
      * </ul>
+     * 每次best block导入时，调用，主要做以下事情:
+     * 1.从pending state and wire lists移除交易
+     * 2.移除过时的交易
+     * 3.更新pending state
      *
      * @param block block imported into blockchain as a <b>BEST</b> one
      */

@@ -29,11 +29,13 @@ import java.util.Set;
 public interface PendingState {
 
     /**
+     * 待确认的repository
      * @return pending state repository
      */
     org.ethereum.core.Repository getRepository();
 
     /**
+     * 获取所有待确认的交易
      * @return list of pending transactions
      */
     List<Transaction> getPendingTransactions();

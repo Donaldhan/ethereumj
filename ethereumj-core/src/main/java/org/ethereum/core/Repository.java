@@ -34,7 +34,7 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Create a new account in the database
-     *
+     * 创建账户
      * @param addr of the contract
      * @return newly created account state
      */
@@ -90,17 +90,21 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Retrieve contract details for a given account from the database
-     *
+     * 获取数据给定账号的合约详情
      * @param addr of the account
      * @return new contract details
      */
     ContractDetails getContractDetails(byte[] addr);
 
+    /**
+     * @param addr
+     * @return
+     */
     boolean hasContractDetails(byte[] addr);
 
     /**
      * Store code associated with an account
-     *
+     * 存储code
      * @param addr for the account
      * @param code that will be associated with this account
      */
@@ -116,7 +120,7 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Retrieve the code hash associated with an account
-     *
+     * 获取code hash
      * @param addr of the account
      * @return code hash
      */
@@ -124,7 +128,7 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Put a value in storage of an account at a given key
-     *
+     * 添加kv对
      * @param addr of the account
      * @param key of the data to store
      * @param value is the data to store
@@ -160,6 +164,7 @@ public interface Repository extends org.ethereum.facade.Repository{
     BigInteger addBalance(byte[] addr, BigInteger value);
 
     /**
+     * 所有账户地址
      * @return Returns set of all the account addresses
      */
     Set<byte[]> getAccountsKeys();
@@ -168,7 +173,7 @@ public interface Repository extends org.ethereum.facade.Repository{
     /**
      * Dump the full state of the current repository into a file with JSON format
      * It contains all the contracts/account, their attributes and
-     *
+     * 以json格式，dump当前repository的状态到文件； 包含所有的合约和账户及他们的属性
      * @param block of the current state
      * @param gasUsed the amount of gas used in the block until that point
      * @param txNumber is the number of the transaction for which the dump has to be made
@@ -179,30 +184,43 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Save a snapshot and start tracking future changes
-     *
+     * 保存快照
      * @return the tracker repository
      */
     Repository startTracking();
 
+    /**
+     *
+     */
     void flush();
+
+    /**
+     *
+     */
     void flushNoReconnect();
 
 
     /**
      * Store all the temporary changes made
      * to the repository in the actual database
+     * 提交repository所有的变更到实际的数据库
      */
     void commit();
 
     /**
      * Undo all the changes made so far
      * to a snapshot of the repository
+     * undo repository
+     *
+     *
+     * Undo repository快照的所有变更
      */
     void rollback();
 
     /**
      * Return to one of the previous snapshots
      * by moving the root.
+     * 通过先前的快照到root
      *
      * @param root - new root
      */
@@ -210,13 +228,14 @@ public interface Repository extends org.ethereum.facade.Repository{
 
     /**
      * Check to see if the current repository has an open connection to the database
-     *
+     * repository是否关闭
      * @return <tt>true</tt> if connection to database is open
      */
     boolean isClosed();
 
     /**
      * Close the database
+     * 关闭db
      */
     void close();
 
@@ -225,15 +244,31 @@ public interface Repository extends org.ethereum.facade.Repository{
      */
     void reset();
 
+    /**
+     * @param accountStates
+     * @param contractDetailes
+     */
     void updateBatch(HashMap<ByteArrayWrapper, AccountState> accountStates,
                             HashMap<ByteArrayWrapper, ContractDetails> contractDetailes);
 
 
+    /**
+     * @return
+     */
     byte[] getRoot();
 
+    /**
+     * @param addr
+     * @param cacheAccounts
+     * @param cacheDetails
+     */
     void loadAccount(byte[] addr, HashMap<ByteArrayWrapper, AccountState> cacheAccounts,
                      HashMap<ByteArrayWrapper, ContractDetails> cacheDetails);
 
+    /**
+     * @param root
+     * @return
+     */
     Repository getSnapshotTo(byte[] root);
 
     /**

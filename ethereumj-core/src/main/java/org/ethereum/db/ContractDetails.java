@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ */
 public interface ContractDetails {
 
     void put(DataWord key, DataWord value);

@@ -181,7 +181,7 @@ public class BasicSample implements Runnable {
     }
 
     /**
-     * peer节点
+     * 发现peer节点
      */
     protected List<Node> nodesDiscovered = new Vector<>();
 
@@ -215,11 +215,15 @@ public class BasicSample implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     protected Map<Node, StatusMessage> ethNodes = new Hashtable<>();
 
     /**
      * Discovering nodes is only the first step. No we need to find among discovered nodes
      * those ones which are live, accepting inbound connections, and has compatible subprotocol versions
+     * 基于发现第一发现节点，我们需要知道哪些节点可用，接收兼容协议版本的连接请求
      */
     protected void waitForAvailablePeers() throws Exception {
         logger.info("Waiting for available Eth capable nodes...");
@@ -241,11 +245,15 @@ public class BasicSample implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     protected List<Node> syncPeers = new Vector<>();
 
     /**
      * When live nodes found SyncManager should select from them the most
      * suitable and add them as peers for syncing the blocks
+     * 寻到同步节点
      */
     protected void waitForSyncPeers() throws Exception {
         logger.info("Searching for peers to sync with...");
@@ -271,6 +279,7 @@ public class BasicSample implements Runnable {
 
     /**
      * Waits until blocks import started
+     * 等待，知道区块导入开始
      */
     protected void waitForFirstBlock() throws Exception {
         Block currentBest = ethereum.getBlockchain().getBestBlock();
@@ -302,6 +311,7 @@ public class BasicSample implements Runnable {
 
     /**
      * Waits until the whole blockchain sync is complete
+     * 等待，直到区块链同步完成
      */
     private void waitForSync() throws Exception {
         logger.info("Waiting for the whole blockchain sync (will take up to several hours for the whole chain)...");

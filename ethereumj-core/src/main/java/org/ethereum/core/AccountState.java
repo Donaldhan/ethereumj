@@ -31,6 +31,9 @@ import static org.ethereum.crypto.HashUtil.*;
 import static org.ethereum.util.FastByteComparisons.equal;
 import static org.ethereum.util.ByteUtil.toHexString;
 
+/**
+ * 账户状态
+ */
 public class AccountState {
 
     private byte[] rlpEncoded;

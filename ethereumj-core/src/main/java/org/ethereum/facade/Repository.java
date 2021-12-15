@@ -25,9 +25,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ */
 public interface Repository {
 
     /**
+     * 账号是否存在
      * @param addr - account to check
      * @return - true if account exist,
      *           false otherwise
@@ -37,7 +41,7 @@ public interface Repository {
 
     /**
      * Retrieve balance of an account
-     *
+     * 获取账号余额
      * @param addr of the account
      * @return balance of the account as a <code>BigInteger</code> value
      */
@@ -46,7 +50,7 @@ public interface Repository {
 
     /**
      * Get current nonce of a given account
-     *
+     * 获取账号nonce
      * @param addr of the account
      * @return value of the nonce
      */
@@ -55,7 +59,7 @@ public interface Repository {
 
     /**
      * Retrieve the code associated with an account
-     *
+     * 获取账号关联的code
      * @param addr of the account
      * @return code in byte-array format
      */
@@ -64,7 +68,7 @@ public interface Repository {
 
     /**
      * Retrieve storage value from an account for a given key
-     *
+     * 获取账户给定key的值
      * @param addr of the account
      * @param key associated with this value
      * @return data in the form of a <code>DataWord</code>
@@ -73,7 +77,7 @@ public interface Repository {
 
     /**
      * Retrieve storage size for a given account
-     *
+     * 获取给定账号存储size
      * @param addr of the account
      * @return storage entries count
      */
@@ -81,7 +85,7 @@ public interface Repository {
 
     /**
      * Retrieve all storage keys for a given account
-     *
+     * 获取给定账号的所有存储key
      * @param addr of the account
      * @return set of storage keys or empty set if account with specified address not exists
      */
@@ -89,7 +93,7 @@ public interface Repository {
 
     /**
      * Retrieve storage entries from an account for given keys
-     *
+     * 账号所有k-v entries
      * @param addr of the account
      * @param keys
      * @return storage entries for specified keys, or full storage if keys parameter is <code>null</code>

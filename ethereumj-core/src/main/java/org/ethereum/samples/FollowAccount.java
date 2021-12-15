@@ -28,6 +28,9 @@ import org.spongycastle.util.encoders.Hex;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ *
+ */
 public class FollowAccount extends EthereumListenerAdapter {
 
 
@@ -53,8 +56,9 @@ public class FollowAccount extends EthereumListenerAdapter {
         long oldNumber = (long) (bestNumber * 0.9);
 
         Block oldBlock = ethereum.getBlockchain().getBlockByNumber(oldNumber);
-
+        //当前区块链状态
         Repository repository = ethereum.getRepository();
+        //1/10之前的区块链状态
         Repository snapshot = ethereum.getSnapshotTo(oldBlock.getStateRoot());
 
         BigInteger nonce_ = snapshot.getNonce(cow);
