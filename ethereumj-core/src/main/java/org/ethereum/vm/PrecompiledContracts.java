@@ -38,6 +38,9 @@ import static org.ethereum.vm.VMUtils.getSizeInWords;
  */
 public class PrecompiledContracts {
 
+    /**
+     *
+     */
     private static final ECRecover ecRecover = new ECRecover();
     private static final Sha256 sha256 = new Sha256();
     private static final Ripempd160 ripempd160 = new Ripempd160();
@@ -112,6 +115,9 @@ public class PrecompiledContracts {
         }
     }
 
+    /**
+     * Hash256
+     */
     public static class Sha256 extends PrecompiledContract {
 
 
@@ -158,6 +164,9 @@ public class PrecompiledContracts {
     }
 
 
+    /**
+     * 签名恢复
+     */
     public static class ECRecover extends PrecompiledContract {
 
         @Override
